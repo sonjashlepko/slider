@@ -1,0 +1,107 @@
+function slider(input)
+{
+    $(input)
+        .parents("td")
+        .find(".slider-group")
+        .html(
+            '<div class="slider_CL"><input type="text" class="SIZE_CL-range-slider" name="size_cl" value="" /></div><div class="slider_CLs"><input type="text" class="SIZE_CLs-range-slider" name="size_cls" value="" /></div><div class="slider_SH"><input type="text" class="SIZE_SH-range-slider" name="size_sh" value="" /></div>'
+        );
+
+    var qnt = $(input)
+        .parents("td")
+        .find("span.size_view").length;
+
+    //слайдер (ползунок размеры одежды)
+    var cl_values = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60];
+
+    // be careful! FROM and TO should be index of values array
+    var cl_from = cl_values.indexOf(42);
+    var cl_to = cl_values.indexOf(50);
+
+    $(".SIZE_CL-range-slider").ionRangeSlider({
+        skin: "round",
+        type: "double",
+        grid: true,
+        from: cl_from,
+        to: cl_to,
+        values: cl_values,
+        onFinish: function (data)
+        {
+            var print = "";
+            for (var i = 0; i < cl_values.length; i++)
+            {
+                if (cl_values[i] >= data.from_value && cl_values[i] <= data.to_value)
+                    print += cl_values[i] + ",";
+            }
+            $(input).val(print);
+        }
+    });
+
+    //слайдер (ползунок размеры детской одежды)
+    var cls_values = [
+        56,
+        62,
+        68,
+        74,
+        80,
+        86,
+        92,
+        98,
+        104,
+        110,
+        116,
+        122,
+        128,
+        134
+    ];
+
+    // be careful! FROM and TO should be index of values array
+    var cls_from = cls_values.indexOf(80);
+    var cls_to = cls_values.indexOf(116);
+
+    $(".SIZE_CLs-range-slider").ionRangeSlider({
+        skin: "round",
+        type: "double",
+        grid: true,
+        from: cls_from,
+        to: cls_to,
+        values: cls_values,
+        onFinish: function (data)
+        {
+            // console.log(data);
+            var print = "";
+            for (var i = 0; i < cls_values.length; i++)
+            {
+                if (cls_values[i] >= data.from_value && cls_values[i] <= data.to_value)
+                    print += cls_values[i] + ",";
+            }
+            $(input).val(print);
+        }
+    });
+
+    //слайдер (ползунок размеры обуви)
+    var sh_values = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
+
+    // be careful! FROM and TO should be index of values array
+    var sh_from = sh_values.indexOf(36);
+    var sh_to = sh_values.indexOf(41);
+
+    $(".SIZE_SH-range-slider").ionRangeSlider({
+        skin: "round",
+        type: "double",
+        grid: true,
+        from: sh_from,
+        to: sh_to,
+        values: sh_values,
+        onFinish: function (data)
+        {
+            var print = "";
+            for (var i = 0; i < sh_values.length; i++)
+            {
+                if (sh_values[i] >= data.from_value && sh_values[i] <= data.to_value)
+                    print += sh_values[i] + ",";
+            }
+            $(input).val(print);
+        }
+    });
+}
